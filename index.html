@@ -1,19 +1,1056 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bree Jeune</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bree Jeune | Immersive Electronic Music</title>
+  <meta name="description" content="Bree Jeune - Immersive electronic music. Deep house, R&B, and experimental sounds.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --amber-400: #fbbf24;
+      --amber-500: #f59e0b;
+      --amber-600: #d97706;
+      --purple-400: #b58cff;
+      --purple-500: #a855f7;
+      --indigo-500: #6366f1;
+      --red-500: #ef4444;
+      --bg-dark: #0a0a12;
+      --bg-mid: #12121f;
+      --surface: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-light: rgba(255, 255, 255, 0.1);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.6);
+      --text-muted: rgba(255, 255, 255, 0.4);
+      --text-dim: rgba(255, 255, 255, 0.2);
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(90, 60, 120, 0.3) 0%, rgba(10, 10, 18, 0.92) 70%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 200;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, var(--purple-400) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Stream buttons */
+    .stream-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .stream-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.75rem;
+      border: 1px solid var(--purple-400);
+      color: var(--purple-400);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    .stream-btn:hover {
+      background: var(--purple-400);
+      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(181, 140, 255, 0.3);
+    }
+
+    .stream-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Social */
+    .social-links {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .social-link {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      border-color: var(--purple-400);
+      color: var(--purple-400);
+      transform: translateY(-3px);
+    }
+
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .scroll-indicator svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      fill: none;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    /* REMIX SECTION */
+    .remix-section {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-mid) 50%, #0d1117 100%);
+      padding: 4rem 0;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--amber-500) 0%, transparent 70%);
+      top: 10%;
+      right: 20%;
+      opacity: 0.15;
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, var(--indigo-500) 0%, transparent 70%);
+      bottom: 20%;
+      left: 10%;
+      opacity: 0.12;
+      animation: pulse 8s ease-in-out infinite 2s;
+    }
+
+    .orb-3 {
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+      top: 50%;
+      right: 5%;
+      opacity: 0.08;
+      animation: pulse 8s ease-in-out infinite 4s;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Remix header */
+    .remix-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .remix-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      color: rgba(251, 191, 36, 0.8);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .remix-title {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 200;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 0%, var(--amber-400) 50%, var(--amber-500) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .track-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-light);
+      border-radius: 2rem;
+      font-size: 0.85rem;
+    }
+
+    .track-badge-label {
+      color: var(--text-muted);
+    }
+
+    .track-badge-name {
+      color: var(--amber-400);
+      font-weight: 500;
+    }
+
+    /* Transport */
+    .transport {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .play-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #1f1f2e 0%, #2a2a3e 100%);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-light);
+    }
+
+    .play-btn.playing {
+      background: linear-gradient(135deg, var(--amber-500) 0%, var(--amber-600) 100%);
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+      border: none;
+    }
+
+    .play-btn svg {
+      width: 32px;
+      height: 32px;
+      fill: white;
+    }
+
+    .play-btn:not(.playing) svg {
+      margin-left: 4px;
+    }
+
+    .steps {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1.5rem;
+    }
+
+    .step {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      transition: all 0.15s ease;
+    }
+
+    .step.beat {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .step.active {
+      background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+      transform: scale(1.3);
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .control-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+    }
+
+    .control-value {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-family: 'Space Mono', monospace;
+      min-width: 24px;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--amber-400);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--amber-400);
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Cards */
+    .card {
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(20px);
+    }
+
+    .card-header {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stem mixer */
+    .stem-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stem-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .stem-name {
+      width: 90px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    .stem-meter {
+      flex: 1;
+      height: 48px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .stem-meter-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.5) 100%);
+      transition: width 0.1s ease, opacity 0.2s ease;
+    }
+
+    .stem-meter-fill.muted {
+      opacity: 0;
+    }
+
+    .stem-meter-fill.playing {
+      background: linear-gradient(90deg, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.6) 100%);
+      box-shadow: inset 0 0 20px rgba(251, 191, 36, 0.3);
+    }
+
+    .stem-bars {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 1rem;
+    }
+
+    .stem-bar {
+      width: 3px;
+      background: rgba(251, 191, 36, 0.6);
+      border-radius: 2px;
+      transition: height 0.1s ease-out;
+    }
+
+    .stem-volume {
+      width: 64px;
+    }
+
+    .stem-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .stem-btn.muted {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--red-500);
+    }
+
+    .stem-btn.solo {
+      background: rgba(251, 191, 36, 0.2);
+      border-color: rgba(251, 191, 36, 0.3);
+      color: var(--amber-400);
+    }
+
+    /* Drum machine */
+    .drum-toggle {
+      width: 100%;
+      padding: 1.25rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .drum-toggle.active {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
+      border-color: rgba(251, 191, 36, 0.3);
+      color: var(--amber-400);
+    }
+
+    .drum-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .drum-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .drum-label {
+      width: 56px;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    .drum-steps {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .drum-step {
+      flex: 1;
+      aspect-ratio: 1;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .drum-step.beat-marker {
+      margin-left: 4px;
+    }
+
+    .drum-step.on {
+      background: linear-gradient(135deg, var(--amber-400) 0%, var(--amber-500) 100%);
+      border: none;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+    }
+
+    .drum-step.current {
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
+      transform: scale(1.1);
+    }
+
+    .presets {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .preset-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    /* Loading */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--border-light);
+      border-top-color: var(--purple-400);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+    }
+
+    .loading-progress {
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--purple-400);
+      color: var(--purple-400);
+    }
+
+    .footer-social svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .stream-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .stream-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+
+      .controls-row {
+        gap: 1rem;
+      }
+
+      .stem-row {
+        flex-wrap: wrap;
+      }
+
+      .stem-name {
+        width: 100%;
+        margin-bottom: -0.5rem;
+      }
+
+      .stem-meter {
+        order: 3;
+        width: 100%;
+        flex: none;
+        height: 40px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <main class="hero">
-    <img src="assets/hero.jpg" alt="Bree Jeune" />
-    <div class="overlay">
-      <h1>Bree Jeune</h1>
-      <p>immersive electronic music</p>
-      <a href="https://open.spotify.com/" class="btn">Listen</a>
+  <div class="loading-overlay" id="loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">LOADING EXPERIENCE</div>
+    <div class="loading-progress" id="loadingProgress">0 / 6</div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="assets/hero.jpg" alt="Bree Jeune" />
+      <div class="hero-overlay"></div>
     </div>
-  </main>
+    <div class="hero-content">
+      <h1 class="hero-title">Bree Jeune</h1>
+      <p class="hero-subtitle">Immersive Electronic Music</p>
+      <div class="stream-buttons">
+        <a href="https://open.spotify.com/artist/1r79cpT97i0D6UXZI1WyP9?si=448ds9RaQL6f_wiPKTptcQ" target="_blank"
+          rel="noopener" class="stream-btn">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+          </svg>
+          Spotify
+        </a>
+        <a href="https://music.apple.com/us/artist/bree-jeune/1865654915" target="_blank" rel="noopener"
+          class="stream-btn">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.802.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.107 1.596-.342 2.296-.792.84-.54 1.464-1.267 1.87-2.14.233-.506.376-1.04.466-1.588.13-.784.16-1.574.16-2.366V6.124zM17.328 16.29c-.015.123-.037.244-.065.364-.203.854-.644 1.543-1.392 2.015-.487.308-1.026.48-1.593.547-.35.042-.7.054-1.05.024a4.31 4.31 0 01-1.59-.397c-.566-.27-.946-.727-1.106-1.345-.092-.353-.076-.713.037-1.062.11-.34.3-.63.56-.87.326-.303.71-.514 1.122-.663.478-.173.97-.292 1.467-.395.32-.067.64-.13.96-.2.23-.05.46-.11.683-.193.21-.078.39-.195.492-.408.037-.077.058-.163.083-.247.007-.025.002-.053.002-.106-.02.013-.034.018-.045.027-.203.164-.43.283-.678.36-.413.13-.84.18-1.27.187-.49.008-.98-.03-1.454-.166-.49-.14-.912-.393-1.208-.81-.197-.275-.3-.588-.33-.925-.038-.437.045-.853.24-1.24.249-.497.635-.862 1.112-1.13.383-.216.794-.358 1.222-.442.53-.106 1.066-.134 1.604-.1.463.03.918.108 1.35.29.5.21.895.547 1.15 1.027.17.32.26.666.29 1.028.01.108.01.217.01.327v4.524zm-4.752-5.1c-.005-.043-.003-.088-.007-.132-.03-.322-.087-.637-.243-.924-.16-.293-.398-.507-.713-.622-.237-.087-.483-.118-.733-.116-.326.003-.643.058-.946.183-.417.17-.749.44-.99.818-.15.234-.24.49-.29.763-.04.21-.05.42-.05.63v.09c.018-.01.028-.013.036-.02.19-.153.403-.27.63-.36.323-.13.66-.2 1-.236.39-.04.78-.033 1.17.03.34.057.67.15.97.315.1.055.19.12.29.18-.03-.2-.07-.4-.12-.6z" />
+          </svg>
+          Apple Music
+        </a>
+      </div>
+      <div class="social-links">
+        <a href="https://www.instagram.com/bree.jeune/" target="_blank" rel="noopener" class="social-link"
+          aria-label="Instagram">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/bree.jeune" target="_blank" rel="noopener" class="social-link"
+          aria-label="Facebook">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <a href="#remix" class="scroll-indicator">
+      <span>Remix Experience</span>
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M19 12l-7 7-7-7" />
+      </svg>
+    </a>
+  </section>
+
+  <section class="remix-section" id="remix">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="container">
+      <header class="remix-header">
+        <p class="remix-label">REMIX EXPERIENCE</p>
+        <h2 class="remix-title">Make It Yours</h2>
+        <div class="track-badge">
+          <span class="track-badge-label">Playing:</span>
+          <span class="track-badge-name" id="trackName">Frequency</span>
+        </div>
+      </header>
+      <div class="transport">
+        <button class="play-btn" id="playBtn">
+          <svg id="playIcon" viewBox="0 0 24 24">
+            <polygon points="5,3 19,12 5,21" />
+          </svg>
+          <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;">
+            <rect x="6" y="4" width="4" height="16" rx="1" />
+            <rect x="14" y="4" width="4" height="16" rx="1" />
+          </svg>
+        </button>
+        <div class="steps" id="steps"></div>
+        <div class="controls-row">
+          <div class="control-group">
+            <span class="control-label">BPM</span>
+            <input type="range" id="bpmSlider" min="90" max="140" value="118" style="width:80px;">
+            <span class="control-value" id="bpmValue">118</span>
+          </div>
+          <div class="control-group">
+            <span class="control-label">WARMTH</span>
+            <input type="range" id="warmthSlider" min="0" max="100" value="60" style="width:64px;">
+          </div>
+          <div class="control-group">
+            <span class="control-label">REVERB</span>
+            <input type="range" id="reverbSlider" min="0" max="100" value="30" style="width:64px;">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="card-header">STEM MIXER</h2>
+        <div id="stemMixer"></div>
+      </div>
+      <button class="drum-toggle" id="drumToggle">+ ADD YOUR OWN DRUMS</button>
+      <div class="card" id="drumMachine" style="display:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+          <h2 class="card-header" style="margin-bottom:0;">DRUM MACHINE</h2>
+          <div class="control-group">
+            <span class="control-label">VOL</span>
+            <input type="range" id="drumVolume" min="0" max="100" value="60" style="width:64px;">
+          </div>
+        </div>
+        <div id="drumGrid"></div>
+        <div class="presets" id="presets"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-social">
+      <a href="https://open.spotify.com/artist/1r79cpT97i0D6UXZI1WyP9?si=448ds9RaQL6f_wiPKTptcQ" target="_blank"
+        rel="noopener" aria-label="Spotify">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+        </svg>
+      </a>
+      <a href="https://music.apple.com/us/artist/bree-jeune/1865654915" target="_blank" rel="noopener"
+        aria-label="Apple Music">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.802.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.107 1.596-.342 2.296-.792.84-.54 1.464-1.267 1.87-2.14.233-.506.376-1.04.466-1.588.13-.784.16-1.574.16-2.366V6.124z" />
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/bree.jeune/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/bree.jeune" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2025 BREE JEUNE • ALL RIGHTS RESERVED</p>
+  </footer>
+
+  <script>
+    const STEM_PATH = './stems/';
+    const STEMS = [
+      { id: 'drums', name: 'Drums', file: 'drums.mp3', volume: 0.8 },
+      { id: 'bass', name: 'Bass', file: 'bass.mp3', volume: 0.8 },
+      { id: 'synths', name: 'Synths', file: 'synths.mp3', volume: 0.7 },
+      { id: 'guitar', name: 'Guitar', file: 'guitar.mp3', volume: 0.6 },
+      { id: 'percussion', name: 'Percussion', file: 'percussion.mp3', volume: 0.6 },
+      { id: 'fx', name: 'FX', file: 'fx.mp3', volume: 0.5 },
+    ];
+
+    let isPlaying = false, currentStep = 0, bpm = 118, warmth = 60, reverbMix = 30, drumVolume = 0.6, showDrumMachine = false;
+    let audioContext = null, stepInterval = null, stemsLoaded = 0;
+    const audioElements = {}, stemState = {};
+
+    const drumInstruments = [{ id: 'kick', name: 'Kick' }, { id: 'snare', name: 'Snare' }, { id: 'hihat', name: 'Hi-Hat' }, { id: 'perc', name: 'Perc' }];
+    let drumPattern = { kick: [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0], snare: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], hihat: [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0], perc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] };
+    const presets = [
+      { name: 'Deep', pattern: { kick: [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0], snare: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], hihat: [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0], perc: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1] } },
+      { name: 'Pulse', pattern: { kick: [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], snare: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], hihat: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], perc: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0] } },
+      { name: 'Minimal', pattern: { kick: [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], snare: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], hihat: [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1], perc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] } },
+      { name: 'Clear', pattern: { kick: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], snare: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], hihat: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], perc: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] } },
+    ];
+
+    function init() { renderSteps(); renderStemMixer(); renderDrumMachine(); renderPresets(); loadStems(); bindEvents(); }
+
+    function loadStems() {
+      const loadingEl = document.getElementById('loading'), progressEl = document.getElementById('loadingProgress');
+      STEMS.forEach(stem => {
+        stemState[stem.id] = { volume: stem.volume, muted: false, solo: false };
+        const audio = new Audio(); audio.src = STEM_PATH + stem.file; audio.loop = true; audio.preload = 'auto';
+        audio.addEventListener('canplaythrough', () => { stemsLoaded++; progressEl.textContent = stemsLoaded + ' / ' + STEMS.length; if (stemsLoaded === STEMS.length) setTimeout(() => loadingEl.classList.add('hidden'), 500); }, { once: true });
+        audio.addEventListener('error', () => { stemsLoaded++; progressEl.textContent = stemsLoaded + ' / ' + STEMS.length; if (stemsLoaded === STEMS.length) setTimeout(() => loadingEl.classList.add('hidden'), 500); });
+        audioElements[stem.id] = audio;
+      });
+    }
+
+    function renderSteps() { const c = document.getElementById('steps'); c.innerHTML = ''; for (let i = 0; i < 16; i++) { const s = document.createElement('div'); s.className = 'step' + (i % 4 === 0 ? ' beat' : ''); s.dataset.step = i; c.appendChild(s); } }
+    function updateSteps() { document.querySelectorAll('.step').forEach((s, i) => s.classList.toggle('active', i === currentStep && isPlaying)); }
+
+    function renderStemMixer() {
+      const c = document.getElementById('stemMixer'); c.innerHTML = '';
+      STEMS.forEach(stem => {
+        const state = stemState[stem.id], row = document.createElement('div'); row.className = 'stem-row';
+        row.innerHTML = '<span class="stem-name">' + stem.name + '</span><div class="stem-meter" data-stem="' + stem.id + '"><div class="stem-meter-fill" style="width:' + (state.volume * 100) + '%"></div><div class="stem-bars"></div></div><input type="range" class="stem-volume" min="0" max="100" value="' + (state.volume * 100) + '" data-stem="' + stem.id + '"><button class="stem-btn ' + (state.muted ? 'muted' : '') + '" data-action="mute" data-stem="' + stem.id + '">M</button><button class="stem-btn ' + (state.solo ? 'solo' : '') + '" data-action="solo" data-stem="' + stem.id + '">S</button>';
+        c.appendChild(row);
+      });
+    }
+
+    function updateStemMeters() {
+      STEMS.forEach(stem => {
+        const state = stemState[stem.id], meter = document.querySelector('.stem-meter[data-stem="' + stem.id + '"]'); if (!meter) return;
+        const fill = meter.querySelector('.stem-meter-fill'), bars = meter.querySelector('.stem-bars');
+        fill.style.width = state.muted ? '0%' : (state.volume * 100) + '%';
+        fill.classList.toggle('muted', state.muted); fill.classList.toggle('playing', isPlaying && !state.muted);
+        if (isPlaying && !state.muted) { bars.innerHTML = ''; for (let i = 0; i < 20; i++) { const b = document.createElement('div'); b.className = 'stem-bar'; b.style.height = (20 + Math.random() * 60 * state.volume) + '%'; bars.appendChild(b); } } else bars.innerHTML = '';
+        const muteBtn = document.querySelector('.stem-btn[data-action="mute"][data-stem="' + stem.id + '"]'), soloBtn = document.querySelector('.stem-btn[data-action="solo"][data-stem="' + stem.id + '"]');
+        if (muteBtn) muteBtn.classList.toggle('muted', state.muted); if (soloBtn) soloBtn.classList.toggle('solo', state.solo);
+      });
+    }
+
+    function renderDrumMachine() {
+      const c = document.getElementById('drumGrid'); c.innerHTML = '';
+      drumInstruments.forEach(inst => {
+        const row = document.createElement('div'); row.className = 'drum-row'; let html = '';
+        for (let i = 0; i < 16; i++) html += '<button class="drum-step ' + (drumPattern[inst.id][i] ? 'on' : '') + (i % 4 === 0 && i > 0 ? ' beat-marker' : '') + '" data-inst="' + inst.id + '" data-step="' + i + '"></button>';
+        row.innerHTML = '<span class="drum-label">' + inst.name + '</span><div class="drum-steps">' + html + '</div>'; c.appendChild(row);
+      });
+    }
+
+    function updateDrumSteps() { document.querySelectorAll('.drum-step').forEach(s => s.classList.toggle('current', parseInt(s.dataset.step) === currentStep && isPlaying)); }
+
+    function renderPresets() {
+      const c = document.getElementById('presets'); c.innerHTML = '';
+      presets.forEach(p => { const btn = document.createElement('button'); btn.className = 'preset-btn'; btn.textContent = p.name; btn.onclick = () => { drumPattern = JSON.parse(JSON.stringify(p.pattern)); renderDrumMachine(); }; c.appendChild(btn); });
+    }
+
+    function togglePlay() {
+      if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('playBtn'), play = document.getElementById('playIcon'), pause = document.getElementById('pauseIcon');
+      btn.classList.toggle('playing', isPlaying); play.style.display = isPlaying ? 'none' : 'block'; pause.style.display = isPlaying ? 'block' : 'none';
+      if (isPlaying) { Object.keys(audioElements).forEach(id => { const a = audioElements[id], s = stemState[id]; a.volume = s.muted ? 0 : s.volume; a.play().catch(() => { }); }); startSequencer(); }
+      else { Object.values(audioElements).forEach(a => a.pause()); stopSequencer(); }
+      updateStemMeters();
+    }
+
+    function startSequencer() { stepInterval = setInterval(() => { currentStep = (currentStep + 1) % 16; updateSteps(); updateDrumSteps(); if (showDrumMachine) playDrumSounds(); if (isPlaying) updateStemMeters(); }, (60 / bpm / 4) * 1000); }
+    function stopSequencer() { if (stepInterval) clearInterval(stepInterval); stepInterval = null; currentStep = 0; updateSteps(); updateDrumSteps(); }
+    function updateBPM(v) { bpm = v; if (isPlaying) { stopSequencer(); startSequencer(); } }
+    function setStemVolume(id, v) { stemState[id].volume = v; if (audioElements[id] && !stemState[id].muted) audioElements[id].volume = v; updateStemMeters(); }
+    function toggleMute(id) { stemState[id].muted = !stemState[id].muted; if (audioElements[id]) audioElements[id].volume = stemState[id].muted ? 0 : stemState[id].volume; updateStemMeters(); }
+    function toggleSolo(id) {
+      if (stemState[id].solo) Object.keys(stemState).forEach(i => { stemState[i].solo = false; stemState[i].muted = false; if (audioElements[i]) audioElements[i].volume = stemState[i].volume; });
+      else Object.keys(stemState).forEach(i => { const s = i === id; stemState[i].solo = s; stemState[i].muted = !s; if (audioElements[i]) audioElements[i].volume = s ? stemState[i].volume : 0; });
+      updateStemMeters();
+    }
+
+    function playDrumSounds() { Object.keys(drumPattern).forEach(t => { if (drumPattern[t][currentStep]) playDrumSound(t); }); }
+    function playDrumSound(type) {
+      if (!audioContext) return; const ctx = audioContext, now = ctx.currentTime, vol = drumVolume, w = warmth / 100;
+      if (type === 'kick') { const o = ctx.createOscillator(), g = ctx.createGain(), f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 200 + w * 100; o.connect(f); f.connect(g); g.connect(ctx.destination); o.frequency.setValueAtTime(120 + w * 30, now); o.frequency.exponentialRampToValueAtTime(0.01, now + 0.4); g.gain.setValueAtTime(vol, now); g.gain.exponentialRampToValueAtTime(0.01, now + 0.4); o.start(now); o.stop(now + 0.4); }
+      else if (type === 'snare') { const bs = ctx.sampleRate * 0.12, b = ctx.createBuffer(1, bs, ctx.sampleRate), d = b.getChannelData(0); for (let i = 0; i < bs; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.04)); const s = ctx.createBufferSource(); s.buffer = b; const g = ctx.createGain(), f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 1000 + w * 500; s.connect(f); f.connect(g); g.connect(ctx.destination); g.gain.setValueAtTime(vol * 0.35, now); s.start(now); }
+      else if (type === 'hihat') { const bs = ctx.sampleRate * 0.04, b = ctx.createBuffer(1, bs, ctx.sampleRate), d = b.getChannelData(0); for (let i = 0; i < bs; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.015)); const s = ctx.createBufferSource(); s.buffer = b; const f = ctx.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = 7000; const g = ctx.createGain(); s.connect(f); f.connect(g); g.connect(ctx.destination); g.gain.setValueAtTime(vol * 0.12, now); s.start(now); }
+      else if (type === 'perc') { const o = ctx.createOscillator(); o.type = 'triangle'; const g = ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.setValueAtTime(800, now); o.frequency.exponentialRampToValueAtTime(200, now + 0.1); g.gain.setValueAtTime(vol * 0.2, now); g.gain.exponentialRampToValueAtTime(0.01, now + 0.1); o.start(now); o.stop(now + 0.1); }
+    }
+
+    function bindEvents() {
+      document.getElementById('playBtn').onclick = togglePlay;
+      document.getElementById('bpmSlider').oninput = e => { document.getElementById('bpmValue').textContent = e.target.value; updateBPM(parseInt(e.target.value)); };
+      document.getElementById('warmthSlider').oninput = e => warmth = parseInt(e.target.value);
+      document.getElementById('reverbSlider').oninput = e => reverbMix = parseInt(e.target.value);
+      document.getElementById('stemMixer').onclick = e => { const b = e.target.closest('.stem-btn'); if (!b) return; if (b.dataset.action === 'mute') toggleMute(b.dataset.stem); if (b.dataset.action === 'solo') toggleSolo(b.dataset.stem); };
+      document.getElementById('stemMixer').oninput = e => { if (e.target.classList.contains('stem-volume')) { const id = e.target.dataset.stem, v = parseInt(e.target.value) / 100; setStemVolume(id, v); const f = document.querySelector('.stem-meter[data-stem="' + id + '"] .stem-meter-fill'); if (f) f.style.width = (v * 100) + '%'; } };
+      const dt = document.getElementById('drumToggle'), dm = document.getElementById('drumMachine');
+      dt.onclick = () => { showDrumMachine = !showDrumMachine; dt.classList.toggle('active', showDrumMachine); dt.textContent = showDrumMachine ? '▼ DRUM MACHINE' : '+ ADD YOUR OWN DRUMS'; dm.style.display = showDrumMachine ? 'block' : 'none'; };
+      document.getElementById('drumVolume').oninput = e => drumVolume = parseInt(e.target.value) / 100;
+      document.getElementById('drumGrid').onclick = e => { const s = e.target.closest('.drum-step'); if (!s) return; drumPattern[s.dataset.inst][parseInt(s.dataset.step)] = drumPattern[s.dataset.inst][parseInt(s.dataset.step)] ? 0 : 1; s.classList.toggle('on'); };
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
 </body>
+
 </html>
